@@ -5,4 +5,5 @@
 
     <color name="color_default">#FAFAFA</color>
     <color name="primary_main">#FFA50A</color>
+    <color name="text_color_hint">#B3FFA50A</color>
 </resources>

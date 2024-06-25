@@ -9,4 +9,6 @@
     <string name="to_enter">Entrar</string>
     <string name="no_count">Não possui conta?</string>
     <string name="register_login">Cadastre-se</string>
+    <string name="email_recovery_message">Informe seu e-mail de cadastro para receber um link para alterar a senha.</string>
+    <string name="to_send">Enviar</string>
 </resources>
