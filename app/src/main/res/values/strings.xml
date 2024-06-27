@@ -11,4 +11,7 @@
     <string name="register_login">Cadastre-se</string>
     <string name="email_recovery_message">Informe seu e-mail de cadastro para receber um link para alterar a senha.</string>
     <string name="to_send">Enviar</string>
+    <string name="name">Nome</string>
+    <string name="confirm_password">Confirmar senha</string>
+    <string name="register_signup">Cadastrar</string>
 </resources>
