@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "95517915314",
+    "project_id": "digital-bank-c7b65",
+    "storage_bucket": "digital-bank-c7b65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95517915314:android:7cd413ee362108067ff1ab",
+        "android_client_info": {
+          "package_name": "com.danielnascimento.bancodigital"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvz_dJwJdQ-3YQ5wJ0Dd92t-3D8ouzzoI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
