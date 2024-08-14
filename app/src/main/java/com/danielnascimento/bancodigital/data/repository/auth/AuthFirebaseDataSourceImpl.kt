@@ -1,10 +1,11 @@
 package com.danielnascimento.bancodigital.data.repository.auth
 
+import com.danielnascimento.bancodigital.data.model.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import javax.inject.Inject
 import kotlin.coroutines.suspendCoroutine
 
-class AuthFirebaseDataSourceImpl(
+class AuthFirebaseDataSourceImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) : AuthFirebaseDataSource {
     override suspend fun login(email: String, password: String) {
@@ -22,21 +23,12 @@ class AuthFirebaseDataSourceImpl(
         }
     }
 
-    override suspend fun register(
-        name: String,
-        email: String,
-        phone: String,
-        password: String
-    ): FirebaseUser {
+    override suspend fun register(user: User): User {
         return suspendCoroutine { continuation ->
-            firebaseAuth.createUserWithEmailAndPassword(email, password)
+            firebaseAuth.createUserWithEmailAndPassword(user.email, user.password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val user = task.result.user
-
-                        user?.let {
-                            continuation.resumeWith(Result.success(user))
-                        }
+                        continuation.resumeWith(Result.success(user))
                     } else {
                         task.exception?.let {
                             continuation.resumeWith(Result.failure(it))
