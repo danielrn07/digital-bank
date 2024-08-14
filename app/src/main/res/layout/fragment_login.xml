@@ -31,7 +31,7 @@
             android:id="@+id/input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text"
+            style="@style/Theme.TextInputEditText"
             android:drawableStart="@drawable/ic_mail"
             android:drawablePadding="8dp"
             android:hint="@string/email"
@@ -52,8 +52,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_password"
             android:layout_width="match_parent"
+            style="@style/Theme.TextInputEditText"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text"
             android:drawableStart="@drawable/ic_lock"
             android:drawablePadding="8dp"
             android:hint="@string/password"
