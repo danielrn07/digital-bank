@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.danielnascimento.bancodigital.R
 import com.danielnascimento.bancodigital.data.model.User
 import com.danielnascimento.bancodigital.databinding.FragmentRegisterBinding
 import com.danielnascimento.bancodigital.util.StateView
@@ -78,9 +80,8 @@ class RegisterFragment : Fragment() {
                 }
 
                 is StateView.Success -> {
-                    Toast.makeText(requireContext(), "Usuário registrado.", Toast.LENGTH_SHORT)
-                        .show()
                     binding.progressBar.isVisible = false
+                    findNavController().navigate(R.id.action_global_homeFragment)
                 }
 
                 is StateView.Error -> {

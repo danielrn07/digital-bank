@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/splashFragment">
+
+    <navigation android:id="@+id/nav_auth"
+        app:startDestination="@id/loginFragment">
+        <fragment
+            android:id="@+id/registerFragment"
+            android:name="com.danielnascimento.bancodigital.presenter.auth.register.RegisterFragment"
+            android:label="fragment_register"
+            tools:layout="@layout/fragment_register" />
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.danielnascimento.bancodigital.presenter.auth.login.LoginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/fragment_login">
+            <action
+                android:id="@+id/action_loginFragment_to_registerFragment"
+                app:destination="@id/registerFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_recoverAccountFragment"
+                app:destination="@id/recoverAccountFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/recoverAccountFragment"
+            android:name="com.danielnascimento.bancodigital.presenter.auth.recover.RecoverAccountFragment"
+            android:label="fragment_recover_account"
+            tools:layout="@layout/fragment_recover_account" />
+        <action
+            android:id="@+id/action_global_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </navigation>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.danielnascimento.bancodigital.presenter.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_navigation"
+            app:destination="@id/nav_auth"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.danielnascimento.bancodigital.presenter.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+</navigation>
