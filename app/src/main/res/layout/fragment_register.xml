@@ -23,7 +23,7 @@
             android:drawableStart="@drawable/ic_user"
             android:drawablePadding="8dp"
             android:hint="@string/name"
-            android:inputType="textEmailAddress" />
+            android:inputType="textCapWords" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +65,7 @@
             android:drawableStart="@drawable/ic_mail"
             android:drawablePadding="8dp"
             android:hint="@string/phone"
-            android:inputType="textEmailAddress" />
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

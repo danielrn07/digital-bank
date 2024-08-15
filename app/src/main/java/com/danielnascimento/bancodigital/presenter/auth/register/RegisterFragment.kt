@@ -6,13 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import com.danielnascimento.bancodigital.data.model.User
 import com.danielnascimento.bancodigital.databinding.FragmentRegisterBinding
+import com.danielnascimento.bancodigital.util.StateView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+    private val registerViewModel: RegisterViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -42,7 +49,11 @@ class RegisterFragment : Fragment() {
             if (email.isNotEmpty()) {
                 if (phone.isNotEmpty()) {
                     if (password.isNotEmpty()) {
-                        Toast.makeText(requireContext(), "registro...", Toast.LENGTH_SHORT).show()
+                        binding.progressBar.isVisible = true
+
+                        val user = User(name, email, phone, password)
+
+                        registerUser(user)
                     } else {
                         Toast.makeText(requireContext(), "Digite sua senha", Toast.LENGTH_SHORT)
                             .show()
@@ -56,6 +67,28 @@ class RegisterFragment : Fragment() {
             }
         } else {
             Toast.makeText(requireContext(), "Digite seu nome", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun registerUser(user: User) {
+        registerViewModel.register(user).observe(viewLifecycleOwner) { stateView ->
+            when (stateView) {
+                is StateView.Loading -> {
+                    binding.progressBar.isVisible = true
+                }
+
+                is StateView.Success -> {
+                    Toast.makeText(requireContext(), "Usuário registrado.", Toast.LENGTH_SHORT)
+                        .show()
+                    binding.progressBar.isVisible = false
+                }
+
+                is StateView.Error -> {
+                    Toast.makeText(requireContext(), stateView.message, Toast.LENGTH_SHORT)
+                        .show()
+                    binding.progressBar.isVisible = false
+                }
+            }
         }
     }
 
