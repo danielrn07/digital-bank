@@ -8,8 +8,10 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.danielnascimento.bancodigital.R
 import com.danielnascimento.bancodigital.databinding.FragmentRecoverAccountBinding
 import com.danielnascimento.bancodigital.util.StateView
+import com.danielnascimento.bancodigital.util.showBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,7 +45,7 @@ class RecoverAccountFragment : Fragment() {
         if (email.isNotEmpty()) {
             recoverAccount(email)
         } else {
-            Toast.makeText(requireContext(), "Digite seu e-mail", Toast.LENGTH_SHORT).show()
+            binding.inputEmail.error = getString(R.string.text_email_empty)
         }
     }
 
@@ -54,14 +56,14 @@ class RecoverAccountFragment : Fragment() {
                     binding.progressBar.isVisible = true
                 }
 
-                is StateView.Error -> {
-                    binding.progressBar.isVisible = false
-                    Toast.makeText(requireContext(), "E-mail enviado.", Toast.LENGTH_SHORT).show()
-                }
-
                 is StateView.Success -> {
                     binding.progressBar.isVisible = false
-                    Toast.makeText(requireContext(), stateView.message, Toast.LENGTH_SHORT).show()
+                    showBottomSheet(message = getString(R.string.text_message_send_email_success))
+                }
+
+                is StateView.Error -> {
+                    binding.progressBar.isVisible = false
+                    stateView.message?.let { showBottomSheet(message = it) }
                 }
             }
         }

@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.danielnascimento.bancodigital.R
 import com.danielnascimento.bancodigital.databinding.FragmentLoginBinding
 import com.danielnascimento.bancodigital.util.StateView
+import com.danielnascimento.bancodigital.util.showBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,10 +59,10 @@ class LoginFragment : Fragment() {
             if (password.isNotEmpty()) {
                 loginUser(email, password)
             } else {
-                Toast.makeText(requireContext(), "Digite sua senha", Toast.LENGTH_SHORT).show()
+                binding.inputPassword.error = getString(R.string.text_passoword_empty)
             }
         } else {
-            Toast.makeText(requireContext(), "Digite seu e-mail", Toast.LENGTH_SHORT).show()
+            binding.inputEmail.error = getString(R.string.text_email_empty)
         }
     }
 

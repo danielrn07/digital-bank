@@ -13,6 +13,7 @@ import com.danielnascimento.bancodigital.R
 import com.danielnascimento.bancodigital.data.model.User
 import com.danielnascimento.bancodigital.databinding.FragmentRegisterBinding
 import com.danielnascimento.bancodigital.util.StateView
+import com.danielnascimento.bancodigital.util.showBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,21 +55,18 @@ class RegisterFragment : Fragment() {
                         binding.progressBar.isVisible = true
 
                         val user = User(name, email, phone, password)
-
                         registerUser(user)
                     } else {
-                        Toast.makeText(requireContext(), "Digite sua senha", Toast.LENGTH_SHORT)
-                            .show()
+                        binding.inputPassword.error = getString(R.string.text_passoword_empty)
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Digite seu telefone", Toast.LENGTH_SHORT)
-                        .show()
+                    binding.inputPhone.error = getString(R.string.text_phone_empty)
                 }
             } else {
-                Toast.makeText(requireContext(), "Digite seu e-mail", Toast.LENGTH_SHORT).show()
+                binding.inputEmail.error = getString(R.string.text_email_empty)
             }
         } else {
-            Toast.makeText(requireContext(), "Digite seu nome", Toast.LENGTH_SHORT).show()
+            binding.inputName.error = getString(R.string.text_name_empty)
         }
     }
 
