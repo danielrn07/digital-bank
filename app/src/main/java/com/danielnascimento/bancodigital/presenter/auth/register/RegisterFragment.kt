@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.danielnascimento.bancodigital.R
 import com.danielnascimento.bancodigital.data.model.User
 import com.danielnascimento.bancodigital.databinding.FragmentRegisterBinding
+import com.danielnascimento.bancodigital.util.FirebaseHelper
 import com.danielnascimento.bancodigital.util.StateView
 import com.danielnascimento.bancodigital.util.showBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
@@ -83,8 +84,22 @@ class RegisterFragment : Fragment() {
                 }
 
                 is StateView.Error -> {
-                    Toast.makeText(requireContext(), stateView.message, Toast.LENGTH_SHORT)
-                        .show()
+                    if (stateView.message!!.contains("email")) {
+                        binding.inputEmail.error =
+                            getString(FirebaseHelper.validError(stateView.message))
+                    } else if (stateView.message!!.contains(("password"))) {
+                        binding.inputPassword.error =
+                            getString(FirebaseHelper.validError(stateView.message ?: ""))
+                    } else {
+                        showBottomSheet(
+                            message = getString(
+                                FirebaseHelper.validError(
+                                    stateView.message ?: ""
+                                )
+                            )
+                        )
+                    }
+
                     binding.progressBar.isVisible = false
                 }
             }

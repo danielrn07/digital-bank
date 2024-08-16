@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.danielnascimento.bancodigital.R
 import com.danielnascimento.bancodigital.databinding.FragmentRecoverAccountBinding
+import com.danielnascimento.bancodigital.util.FirebaseHelper
 import com.danielnascimento.bancodigital.util.StateView
 import com.danielnascimento.bancodigital.util.showBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,8 +63,20 @@ class RecoverAccountFragment : Fragment() {
                 }
 
                 is StateView.Error -> {
+                    if (stateView.message!!.contains("email")) {
+                        binding.inputEmail.error =
+                            getString(FirebaseHelper.validError(stateView.message))
+                    } else {
+                        showBottomSheet(
+                            message = getString(
+                                FirebaseHelper.validError(
+                                    stateView.message ?: ""
+                                )
+                            )
+                        )
+                    }
+
                     binding.progressBar.isVisible = false
-                    stateView.message?.let { showBottomSheet(message = it) }
                 }
             }
         }
